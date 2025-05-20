@@ -51,13 +51,28 @@ function handleMenu(choice) {
     switch(choice.trim()) {  // Use the trimmed input for comparision 
         case '1': 
             listTasks()      // If '1', show all tasks 
-        break 
+            break 
 
         case '2':
             addTask()        // If '2', add a new task
-        break
+            break
 
         case '3':
-            prompt
+            promptMarkTaskAsDone()  // If '3', mark a task as completed 
+            break 
+
+        case '4':
+            promptDeleteTask()      // If '4', delete a task 
+            break 
+
+        case '5':
+            console.log('Goodbye!') // If '5', print goodbye and close the app
+            rl.close()              // Close readline interface 
+            break
+        default:
+            console.log('Invalid choice. Try again.') // If not 1-5, show error message 
+            showMenu()                                // Show menu again
+            break
+            
     }
 }
