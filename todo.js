@@ -52,19 +52,15 @@ function handleMenu(choice) {
         case '1': 
             listTasks()      // If '1', show all tasks 
             break 
-
         case '2':
             addTask()        // If '2', add a new task
             break
-
         case '3':
             promptMarkTaskAsDone()  // If '3', mark a task as completed 
             break 
-
         case '4':
             promptDeleteTask()      // If '4', delete a task 
             break 
-
         case '5':
             console.log('Goodbye!') // If '5', print goodbye and close the app
             rl.close()              // Close readline interface 
@@ -73,6 +69,20 @@ function handleMenu(choice) {
             console.log('Invalid choice. Try again.') // If not 1-5, show error message 
             showMenu()                                // Show menu again
             break
-            
+
     }
+}
+
+// NOTE - Function to display all tasks in the list 
+function listTasks() {
+    console.log('\n Your TO-DO List:') // Print list header 
+    if(todos.length === 0) {           // If there are no tasks
+        console.log('No tasks found')  // Inform the user that list is empty 
+    } else {                           // If there are tasks 
+        todos.forEach((task, idx) => { // For each task in the array
+            const status = task.done ? 'Complete' : 'Not complete' // Determine status text 
+            console.log(`${idx + 1}. (${status}) ${task.text}`)    // Print task number, status and description 
+        })
+    }
+    showMenu()    // Show menu again after listing tasks 
 }
