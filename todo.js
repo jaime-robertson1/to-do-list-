@@ -128,5 +128,5 @@ function markTaskAsDone(num) {
     } else {
         console.log('Invalid task number.')      // If input invalid, show error
     }
-    showMenu()
+    showMenu()                                   // Show menu again 
 }
