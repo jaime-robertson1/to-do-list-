@@ -22,3 +22,42 @@ if(fs.existsSync(FILE)) {
         todos = []
     }
 }
+
+// NOTE - Create a readline interface for command line interface 
+const rl = readline.createInterface({
+    input: process.stdin, // Set standard input (keyboard) as input source 
+    output: process.stdout // Set standard output (keyboard) as output target
+})
+
+// TODO - Function to display the main menu options 
+function showMenu() {
+    console.log('\n To-Do List App ===') // Print the app header 
+    console.log('1. Show tasks')         // Option 1 : Show all tasks 
+    console.log('2. Add Task')           // Option 2: Add a new task
+    console.log('3. Mark Task as Done')  // Option 3: Mark a task as completed 
+    console.log('4. Delete a Task')      // Option 4: Delete a task 
+    console.log('5. Exit')               // Option 5: Exit the app
+    rl.question('\n Choose an option (1-5): ', handleMenu) // Prompt user for menu choice 
+}
+
+// NOTE - Function to save tasks array to the task.json file 
+function saveTasks() {
+    fs.writeFileSync(FILE, JSON.stringify(todos, null, 2)) // Write the todos array as pretty JSON
+
+}
+
+// TODO - Function to handle the menu option entered by the user 
+function handleMenu(choice) {
+    switch(choice.trim()) {  // Use the trimmed input for comparision 
+        case '1': 
+            listTasks()      // If '1', show all tasks 
+        break 
+
+        case '2':
+            addTask()        // If '2', add a new task
+        break
+
+        case '3':
+            prompt
+    }
+}
