@@ -86,3 +86,47 @@ function listTasks() {
     }
     showMenu()    // Show menu again after listing tasks 
 }
+
+
+// NOTE - Function to add a new task to the list 
+function addTask() {
+    rl.question('\n Enter the task: ', (task) => { // Prompt user to enter the task description
+        if(task.trim() === '') {    // If input is empty or only spaces 
+            console.log('Task cannot be empty.') // Show error message 
+        } else {
+            todos.push({text: task, done: false}) // Add a new task object (not completed by default)
+            saveTasks()                           // Save updated tasks to file
+            console.log('Task added!')            // Confirm addition 
+        }
+        showMenu()                                // Show menu again 
+    })
+}
+
+// NOTE - Function to prompt the user to select a task to mark as completed
+function promptMarkTaskAsDone() {
+    if(todos.length === 0) {                        // If there are no task
+        console.log('\ No task to mark as done.')   // Inform user
+        return showMenu()
+    }
+    console.log('\n Select the number of tasks to mark as completed:') // Print prompt header 
+    todos.forEach((task, idx) => {                                     // List all tasks with their numbers 
+        const status = task.done ? 'Completed' : 'Not completed'       // Status as text
+        console.log(`${idx + 1}. (${status}) ${task.text}`)                 // Print each task
+    })
+    rl.question('\n Task number: ', (num) => { // Prompt for task number 
+        markTaskAsDone(num)                    // Pass input to markTaskAsDone function 
+    })
+}
+
+// NOTE - Function to mark the selected task as completed 
+function markTaskAsDone(num) {
+    let idx = parseInt(num) - 1 // Convert user input to array index
+    if (todos[idx]) {           // If a task exists at that index
+        todos[idx].done = true  // Mark the task as completed 
+        saveTasks()             // Save changes to file 
+        console.log('Task marked as completed!') // Confirm completion 
+    } else {
+        console.log('Invalid task number.')      // If input invalid, show error
+    }
+    showMenu()
+}
