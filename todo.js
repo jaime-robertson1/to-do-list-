@@ -130,3 +130,34 @@ function markTaskAsDone(num) {
     }
     showMenu()                                   // Show menu again 
 }
+
+// NOTE - Function to prompt the user to select a task to delete
+function promptDeleteTask() {
+    if(todos.length === 0) { // If there are no tasks
+        console.log('\n No tasks to delete.') // Inform user 
+        return showMenu() // Show menu and exit this function 
+    } 
+    console.log('\n Select the number of the task to delete.')  // Print prompt header 
+    todos.forEach((task,idx) => {                               // List all tasks with their numbers
+        const status = task.done ? 'Completed' : 'Not complete' // Status as text
+        console.log(`${idx + 1}.(${status}) ${task.text}`)      // Print each task 
+    })
+    rl.question('\n Task number: ', (num) => {                  // Prompt for task number
+        deleteTask(num)                                         // Pass input to deleteTask function
+    })
+}
+
+// NOTE - Function to delete the selected task
+function deleteTask(num) {
+    let idx = parseInt(num) - 1 
+    if(todos[id]) {
+        todos.splice(idx, 1)
+        saveTasks()
+        console.log('Task is deleted!')
+    } else {
+        console.log('Invalid task number.')
+    }
+    showMenu()
+}
+
+// Start the app by showing the main menu
